@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url({{ url_for('static', filename='home2002.jpg') }});
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .black-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 20px;
+        box-sizing: border-box;
+        overflow: auto;
+    }
+
+    .btn-primary, .btn-start-presentation {
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        width: 20%;
+        margin-top: 6rem;
+        margin-bottom: 4rem;
+    }
+
+    .card {
+        margin: 10px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        /* Optionally, reduce the bottom margin of cards to tighten layout */
+    }
+
+    .icon-user {
+        color: #28a745;
+    }
+
+    #minimal-statistics {
+        margin-top: -2rem; /* Adjust top margin for consistent spacing */
+    }
+
+    #stats-subtitle {
+        margin-top: 2rem; /* Adjust top margin to the cards' section */
+        margin-bottom: 4rem; /* Keep bottom margin to the cards' section */
+    }
+    .grey-bg container-fluid{
+        margin-top: 2px;
+    }
+
+</style>
+
+<div class="grey-bg container-fluid">
+  <section id="minimal-statistics">
+    <div class="row">
+      <div class="col-12 mt-3 mb-1">
+        <h4 class="text-uppercase" style="font-weight: bolder; color: white;">Statistics Cards</h4>
+        <p style="font-size: large; font-weight:bold; color: white;">TV Display statistics.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <i class="bi bi-tv" style="font-size: xx-large" style="color: black"></i>
+                </div>
+                <div class="media-body text-right">
+                  <h3 id="tvs_num">Loading...</h3>
+                  <span>Available Tvs number</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <i class="icon-pointer danger font-large-2 float-left" style="color: black"></i>
+                </div>
+                <div class="media-body text-right">
+                  <h3>Tanger Free Zone </h3>
+                  <span>- TFZ 90100 Tanger - Maroc</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <i class="icon-user success font-large-2 float-right" style="color:black;"></i>
+                </div>
+                <div class="media-body text-right">
+                  <h3 id ="users_num">Loading.....</h3>
+                  <span>Users Number</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="align-self-center">
+                  <i class="icon-book-open primary font-large-2 float-right" style="color: black"></i>
+                </div>
+                <div class="media-body text-right">
+                  <h3 id="files-num">Loading...</h3>
+                  <span>Files number</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-xl-6 col-md-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body clearfix">
+              <div class="media align-items-stretch">
+                <div class="align-self-center">
+                  <h1 class="mr-2" id="tv-on">Loading...</h1>
+                </div>
+                <div class="media-body">
+                  <h4>Number of TVs:</h4>
+                  <span>Presentation Running...</span>
+                </div>
+                <div class="align-self-center">
+                  <a href="{{ url_for('TVs_manage_page') }}">
+                    <i class="bi bi-play" style="font-size:xxx-large; color: red"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body clearfix">
+              <div class="media align-items-stretch">
+                <div class="align-self-center">
+                  <h1 class="mr-2">GMD EMBOUTISSAGE</h1>
+                </div>
+                  <div class="media-body">
+                    <h6>CONCEPTION ET PRODUCTION</h6>
+                    <h6>DE PIÈCES <span style="font-weight:bold">TECHNIQUES</span> ET</h6>
+                    <span style="font-weight:bold">COMPLEXES</span>
+                  </div>
+                  <div class="align-self-center">
+                    <div>
+                       <i class="icon-rocket danger font-large-2 float-right"></i>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-xl-12 text-center">
+          <a href="{{ url_for('TV_display_page') }}" class="btn btn-start-presentation">Start Presentation</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function fetchTVStatus() {
+            fetch('/current_tv_status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('tv-on').textContent = data.tv_on;
+                })
+                .catch(error => console.error('Error fetching TV status:', error));
+        }
+
+        // Fetch status immediately and then every 10 seconds
+        fetchTVStatus();
+        setInterval(fetchTVStatus, 5000);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        function fetchFilenumber() {
+            fetch('/current_number_files')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('files-num').textContent = data.Files_Number;
+                })
+                .catch(error => console.error('Error fetching TV status:', error));
+        }
+
+        // Fetch status immediately and then every 10 seconds
+        fetchFilenumber();
+        setInterval(fetchFilenumber, 5000);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        function fetchUsernumber() {
+            fetch('/current_user_number')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('users_num').textContent = data.Users_Number;
+                })
+                .catch(error => console.error('Error fetching TV status:', error));
+        }
+
+        // Fetch status immediately and then every 10 seconds
+        fetchUsernumber();
+        setInterval(fetchUsernumber, 5000);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        function fetchTvnumber() {
+            fetch('/current_tv_number')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('tvs_num').textContent = data.TVs_Number;
+                })
+                .catch(error => console.error('Error fetching TV status:', error));
+        }
+        fetchTvnumber();
+        setInterval(fetchTvnumber, 5000);
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}
+    Display TV
+{% endblock %}
+
+{% block content %}
+<style>
+    .container-full {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Full viewport height */
+    }
+
+    .card-custom {
+        background: rgba(255, 255, 255, 0.8); /* Light background with slight transparency */
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        padding: 30px; /* Ample padding for aesthetics */
+        border: none; /* No border for a cleaner look */
+        width: 100%;
+        max-width: 600px; /* Responsive max width */
+        height: 60vh; /* 60% of the viewport height */
+        overflow: hidden;
+    }
+
+    .card-body-custom {
+        padding: 1rem 2rem; /* Adjust padding */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .form-label-custom {
+        font-weight: bold;
+        color: #333; /* Change label color */
+    }
+
+    .form-control-custom {
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        padding: 0.75rem; /* Adjust padding */
+        font-size: 1rem; /* Adjust font size */
+        border-radius: 5px; /* Round input corners */
+        border: 1px solid #ced4da; /* Input border */
+        margin-left: 5px;
+    }
+
+    .btn-custom {
+        background-color: red;
+        color: white;
+        font-weight: 500;
+        border: none;
+        padding: 0.75rem 1.5rem; /* Adjust padding */
+        transition: background-color .15s ease-in-out;
+        border-radius: 5px; /* Round button corners */
+        font-size: 1.25rem; /* Adjust font size */
+        margin-top: 2rem; /* Add margin for spacing */
+        margin-left: 120px;
+    }
+
+    .btn-custom:hover {
+        background-color: darkred;
+    }
+
+    .alert-danger {
+        margin-top: 0.5rem; /* Add margin to error message */
+    }
+
+    .card-title {
+        margin-bottom: 1rem; /* Adjust margin */
+        color: #333; /* Ensuring text visibility */
+    }
+</style>
+
+<div class="container-full">
+    <div class="card card-custom">
+        <div class="card-body card-body-custom">
+            <h5 class="card-title text-center" style="font-size: 1.75rem; font-weight: 500;">Enter TV Serial Number</h5>
+            <form method="POST" action="{{ url_for('TV_display_page') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.serial_number.label(class="form-label form-label-custom") }}
+                    {{ form.serial_number(class="form-control form-control-custom") }}
+                    {% if form.serial_number.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.serial_number.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-lg btn-custom">
+                        Start Presentation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

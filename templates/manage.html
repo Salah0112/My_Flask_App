@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    TV Display Page
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: black;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+        margin-bottom: 40px; /* Maintain vertical spacing between cards */
+    }
+    .card:hover {
+        transform: scale(1.03);
+    }
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover; /* Ensure the image covers the entire top area of the card */
+        object-position:center; /* Center the image */
+    }
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 16px;
+    }
+    .btn-outline-danger {
+        font-size: 14px;
+        border: 2px solid;
+        padding: 5px 10px;
+    }
+    .remove-btn-container {
+        text-align: right;
+        padding-right: 20px;
+        padding-bottom: 10px;
+    }
+    .add-new-tv {
+        background-color: rgb(255,0,0);
+        border-color: white;
+        color: white;
+        font-size: 32px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .add-new-tv:hover {
+        background-color: darkred;
+        color: #eee;
+    }
+    .add-tv-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px; /* Match the height of the TV cards */
+    }
+    .container.mt-5 {
+        margin-top: 80px; /* Additional top margin */
+        padding-bottom: 80px; /* Additional bottom padding */
+    }
+    .row {
+        row-gap: 40px; /* Vertical gap between rows */
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: white;">Manage TVs</h2>
+    <div class="row gx-4 gy-4">
+        {% for tv in all_tvs %}
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+            <div class="card shadow h-100">
+                <img class="card-img-top" src="{{ tv.image_url or url_for('static', filename='TVimage.webp') }}" alt="TV Image">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ tv.Serial_Number }}</h5>
+                    <p class="card-text">{{ tv.Location }}</p>
+                    <p class="card-text"><small class="text-muted"><span style="font-size:large">{{ tv.Status }}</span></small></p>
+                    {% if tv.assigned_file %}
+                        <p class="card-text">{{ tv.assigned_file.File_Name }}</p>
+                    {% else %}
+                        <p class="card-text text-danger">No assigned file</p>
+                    {% endif %}
+                </div>
+                {% if has_permission('TdAdmin') %}
+                <div class="remove-btn-container">
+                    <form action="{{ url_for('remove_tv', tv_id=tv.id) }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this TV?');">Remove</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% if has_permission('TdAdmin') %}
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 add-tv-container">
+            <a href="{{ url_for('add_new_tv') }}" class="btn add-new-tv">
+                <i class="bi bi-plus"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

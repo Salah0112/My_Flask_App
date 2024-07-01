@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add New TV
+{% endblock %}
+
+{% block content %}
+<style>
+    .custom-card {
+        background: rgba(255, 255, 255, 0.8); /* Light background with slight transparency */
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        padding: 30px; /* Ample padding for aesthetics */
+        border: none; /* No border for a cleaner look */
+    }
+    .form-control, .btn-primary {
+        border-radius: 0.25rem; /* Consistent rounded corners for form elements */
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* Subtle inset shadow for inputs */
+    }
+    .btn-primary {
+        background-color: red; /* Vibrant blue for primary actions */
+        border-color: white; /* Matching border color */
+        font-size: 16px; /* Slightly larger font size for readability */
+        padding: 10px 20px; /* Comfortable padding */
+        margin-left: 250px;
+    }
+    .card-header {
+        background-color: transparent; /* Transparent header */
+        border-bottom: 2px solid #dee2e6; /* Light border for separation */
+        color: #333; /* Dark text for contrast */
+        font-size: 24px; /* Larger font size for the header */
+        font-weight: bold; /* Bold font weight for emphasis */
+    }
+</style>
+<div class="container mt-5">
+    <h2 class="text-center" style="color: #FFF; margin-bottom: 30px;">Add New TV</h2> <!-- Centered heading with custom color and spacing -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card custom-card">
+                <div class="card-header text-center">Enter TV Details</div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group mb-3" style="color: black ;font-size: large">
+                            {{ form.Serial_Number.label(class="form-label") }}
+                            {{ form.Serial_Number(class="form-control") }}
+                            {% if form.Serial_Number.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.Serial_Number.errors[0] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group mb-3" style="color: black;font-size: large">
+                            {{ form.Location.label(class="form-label") }}
+                            {{ form.Location(class="form-control") }}
+                            {% if form.Location.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.Location.errors[0] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group mb-3" style="color: black;font-size: large" >
+                            {{ form.User_id.label(class="form-label") }}
+                            {{ form.User_id(class="form-control") }}
+                            {% if form.User_id.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.User_id.errors[0] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
